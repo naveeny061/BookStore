@@ -1,0 +1,83 @@
+.display{
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 8%;
+    margin-right: 8%;
+}
+.heading{
+    font-size: 20px;
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 4%;
+    margin-left: 1%;
+    align-items: center;
+}
+.display-book{
+    /* display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-column-gap: 1px;
+    grid-row-gap: 1px;
+    /* margin-right: 6% !important; */
+}
+.booksNumber{
+    font-size: 15px;
+    color: gray;
+}
+.book{
+    border: 0.5px solid lightgrey;
+    margin: 10px;
+    width: 80%;
+    /* max-width: 250px !important; */
+}
+.option{
+    display: flex;
+    justify-content: space-between;
+}
+.details{
+    padding: 5%;
+}
+.bookName{
+    font-weight: 600;
+    font-size: 20px;
+    padding-bottom:  2px;
+    padding-left: 5px;
+}
+.bookAuther{
+    font-weight: 200;
+    font-size: 12px;
+    padding-left: 5px;
+}
+.bookCost{
+    padding-left: 5px;
+}
+.display-button{
+    background-color: brown !important;
+    margin: 5px !important;
+    color: white !important;
+    font-size: 10px !important;
+    white-space: nowrap;
+}
+.wishList{
+    background-color: unset !important;
+    margin: 5px !important;
+    font-weight: 200;
+    font-size: 10px !important;
+}
+.display-image{
+    height: 40%;
+    width: 40%;
+    padding: 10px 0;
+}
+.images{
+    display: flex;
+    justify-content: center;
+    background-color: lightgray;
+    /* height: 10%; */
+    /* width: 20%; */
+}

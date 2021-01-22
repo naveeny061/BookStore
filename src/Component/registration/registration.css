@@ -1,0 +1,39 @@
+.main{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgrey;
+    border-radius: 0.5em;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.textField{
+    /* margin: 10px !important; */
+    padding-bottom: 25px !important;
+    margin-block-start: unset !important;
+    margin-block-end: unset !important;
+}
+.leftContainer{
+    justify-content: flex-end;
+    border: 1px solid lightgray;
+    height: 50%;
+    width: 30%;
+    padding: 2%;
+}
+.image{
+    width: 100%;
+    height: 100%;
+}
+.button-registration{
+    background-color: #A52A2A !important;
+    color: white !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    width: 300px !important;
+    margin-bottom: 20px !important;
+}

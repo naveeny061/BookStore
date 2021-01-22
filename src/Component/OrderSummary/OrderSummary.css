@@ -1,0 +1,25 @@
+.orderSummary{
+    border: 1px solid lightgray;
+    margin: 5% 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 2%;
+}
+.orderSummary-text{
+    margin: 40%;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.orderSummary-details{
+    margin: 5%;
+}
+.orderbook-details{
+    display: flex;
+    margin-top: 5%;
+}
+.checkout{
+    align-self: flex-end;
+    margin-right: 5%;
+    margin-bottom: 5%;
+}

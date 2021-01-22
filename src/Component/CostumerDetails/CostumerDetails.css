@@ -1,0 +1,44 @@
+.custumerDetails{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    align-items: flex-start;
+    border: 1px solid lightgray;
+    margin: 5% 15%;
+    padding-top: 20px;
+}
+.custumerDetails-text{
+    margin: 40%;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.container{
+    display: flex;
+}
+.Row{
+    display: flex;
+    margin-top: 10%;
+    margin-left: 10%;
+}
+.Field{
+    width: 100%;
+    margin: unset !important;
+}
+.Field1{
+    /* width: 115% !important; */
+    margin: unset !important;
+}
+.mr{
+    margin-right: 5% !important;
+}
+.type{
+    flex-direction: row !important;
+}
+.type-text{
+    text-align: start;
+}
+.Continue{
+    align-self: flex-end;
+    margin-bottom: 5%;
+    margin-right: 5%;
+}
