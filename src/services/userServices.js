@@ -44,7 +44,14 @@ export default class userService{
         });
     }
     customerDetails = (data,token) => {
-        return httpService.Put(`https://backend-bookstore.herokuapp.com/bookstore_user  /edit_user`, data,{
+        return httpService.Put(`https://backend-bookstore.herokuapp.com/bookstore_user/edit_user`, data,{
+            headers: {
+                "x-access-token": `${token}`,
+            }
+        });
+    }
+    Order = (data,token) => {
+        return httpService.Post(`https://backend-bookstore.herokuapp.com/bookstore_user/add/order`, data,{
             headers: {
                 "x-access-token": `${token}`,
             }

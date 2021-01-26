@@ -20,7 +20,7 @@
     width: 20%;
     padding: 2%;
 }
-.image{
+.image-login{
     width: 90%;
     height: 90%;
 }
@@ -36,4 +36,14 @@
     border-radius: 6px;
     opacity: 1;
     min-height: 35%;
+}
+@media screen and (max-width:360px) {
+    .leftContainer-login{
+        display: none;
+    }
+    .form{
+        padding-top: unset;
+        box-shadow: unset;
+        border: unset ;
+    }
 }

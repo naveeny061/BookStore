@@ -5,7 +5,10 @@
     align-items: flex-start;
     border: 1px solid lightgray;
     margin: 5% 15%;
-    padding-top: 20px;
+    /* padding-top: 20px; */
+}
+.custumer{
+    padding: 2% 0;
 }
 .custumerDetails-text{
     margin: 40%;
@@ -17,7 +20,7 @@
 }
 .Row{
     display: flex;
-    margin-top: 10%;
+    margin-top: 5%;
     margin-left: 10%;
 }
 .Field{
@@ -39,6 +42,19 @@
 }
 .Continue{
     align-self: flex-end;
+    text-align: end;
     margin-bottom: 5%;
     margin-right: 5%;
+}
+@media screen and (max-width:360px) {
+    .Row{
+        flex-direction: column;
+        margin: 5%;
+    }
+    .pd{
+        margin-top: 5% !important;
+    }
+    .Continue{
+        margin-right: 2%;
+    }
 }

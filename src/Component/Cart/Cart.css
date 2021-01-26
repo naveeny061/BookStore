@@ -1,3 +1,6 @@
-.myCart{
-    border: 1px solid lightgray;
+.cart-details{
+    /* border: 1px solid lightgray; */
+    min-height: 100vh;
+    /* display: flex; */
+    /* flex-direction: column; */
 }

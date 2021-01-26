@@ -3,11 +3,20 @@ import Service from '../../services/userServices'
 import Image from "../../assests/textbook.png";
 import "./MyCart.css";
 import Button from '@material-ui/core/Button'
+import CostumerDetails from "../CostumerDetails/CostumerDetails";
 
 const services = new Service()
 
 export default function MyCart(props) {
-    // const [cartList, setCartList] = React.useState([]);
+    const [displayCart, setdisplayCart] = React.useState(true);
+    const [displayCustomer ,setdisplayCustomer] = React.useState(false)
+
+    const handleClick = () => {
+        setdisplayCart(false)
+        setdisplayCustomer(true)
+        // setdisplayOrderSummary()
+    }
+    
     const quantityUpdate = (itemID, quantity) => {
         let userData = {
             "quantityToBuy": quantity
@@ -27,13 +36,13 @@ export default function MyCart(props) {
             console.log(error)
         })
     }
-    return (
+       return (<div>
             <div className="myCart">
                 <span className="myCart-text">My Cart</span>
                 {props.cartList.map((item) => (
                     <div className="myCart-details">
                         <div>
-                            <img className="image" src={Image} alt="" />
+                            <img className="image1" src={Image} alt="" />
                         </div>
                         <div className="bookdetails">
                             <div className="bookNameCart">
@@ -62,11 +71,16 @@ export default function MyCart(props) {
                         </div>
                     </div>   
                 ))}
-                <div className="placeOrder">
-                            <Button  className="placeOrderButton" variant="contained" color="primary">
-                                PLACE ORDER
-                            </Button>
+                {displayCart ? 
+                    <div className="placeOrder">
+                        <Button  className="placeOrderButton" variant="contained" color="primary" onClick={handleClick}>
+                            PLACE ORDER
+                        </Button>
+                    </div>
+                    :null
+                }
                 </div>
+                <CostumerDetails displayCustomer={displayCustomer} cartList={props.cartList} removeBook={removeBook} />
             </div>
     )
 }

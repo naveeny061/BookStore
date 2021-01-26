@@ -3,8 +3,9 @@ import AppBar from "../AppBar/appBar";
 import "./Cart.css";
 import MyCart from "../MyCart/MyCart";
 import Footer from '../footer/footer';
-import CostumerDetails from "../CostumerDetails/CostumerDetails";
-import OrderSummary from "../OrderSummary/OrderSummary";
+import "./Cart.css";
+// import CostumerDetails from "../CostumerDetails/CostumerDetails";
+// import OrderSummary from "../OrderSummary/OrderSummary";
 import Service from '../../services/userServices'
 
 const services = new Service()
@@ -25,11 +26,9 @@ export default function Cart() {
         getCartBooks()
     }, [])
     return (
-        <div>
+        <div className='cart-details'>
             <AppBar/>
             <MyCart cartList={cartList} getCartBooks={getCartBooks}/>
-            <CostumerDetails/>
-            <OrderSummary cartList={cartList}/>
             <Footer/>
         </div>
     )

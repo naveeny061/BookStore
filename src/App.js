@@ -3,6 +3,7 @@ import Registration from './Component/registration/registration'
 import Login from "./Component/login/login";
 import DashBoard from "./Component/Dashboard/dashBoard";
 import Cart from "./Component/Cart/Cart"
+import OrderSuccess from "./Component/OrderSuccess/OrderSuccess"
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
           <Route exact path="/registration" component={Registration} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/dashBoard" component={DashBoard}/>
-          <Route exact path="/cart" component={Cart}/>  
+          <Route exact path="/cart" component={Cart}/> 
+          <Route exact path="/orderPlaced" component={OrderSuccess}/>  
         </Switch>
       </BrowserRouter>
     </div>

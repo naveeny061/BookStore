@@ -6,6 +6,7 @@ import Service from '../../services/userServices';
 import Image from "../../assests/logo.png";
 import SnackBar from "@material-ui/core/Snackbar";
 import { IconButton } from '@material-ui/core'
+import {Redirect} from 'react-router-dom'
 
 const services = new Service()
 
@@ -13,6 +14,7 @@ export default class Registration extends React.Component{
     constructor(props){
         super(props)
         this.state = {
+            redirect:false,
             fullName:'',
             email:'',
             password:'',
@@ -138,7 +140,8 @@ export default class Registration extends React.Component{
                 this.reset()
                 this.setState(
                     {
-                        snackbarOpen: true
+                        snackbarOpen: true,
+                        redirect:true
                     })
             }).catch(error => {
                 console.log(error)
@@ -155,10 +158,13 @@ export default class Registration extends React.Component{
         })
     }
     render(){
+        if(this.state.redirect){
+            return <Redirect to='/login' />
+        }
         return(
             <div className='main'>
                 <div className='leftContainer'>
-                    <img className='image' src={Image} alt=""/>
+                    <img className='image-reg' src={Image} alt=""/>
                     <span className='text'>Online Book Store</span>
                 </div>
                 <div>

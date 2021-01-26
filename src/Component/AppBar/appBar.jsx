@@ -8,7 +8,6 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-// import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCartOutlined';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -17,6 +16,9 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import './appBar.css';
 import Image from "../../assests/books.svg";
+import { Redirect } from 'react-router-dom'
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -44,6 +46,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
       width: '500px',
+    },
+    [theme.breakpoints.down('md')]: {
+      // marginLeft: theme.spacing(3),
+      // width: '500px',
+      display:'none'
     },
   },
   searchIcon: {
@@ -73,30 +80,33 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   sectionDesktop: {
-    display: 'none',
     marginRight:'10%',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     },
   },
-  sectionMobile: {
+  profile:{
     display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
+    flexDirection:'column',
+    alignItems:'center',
+    // marginTop:'20px',
+    // marginLeft:'50px',
+    // marginRight:'50px'
+  }
 }));
 
 export default function App(){
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const[redirect, setRedirect] = React.useState(false)
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    // setAnchorEl(event.currentTarget);
+    setRedirect(true)
   };
 
   const handleMobileMenuClose = () => {
@@ -110,6 +120,11 @@ export default function App(){
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    // setRedirect(true);
   };
 
   const menuId = 'primary-search-account-menu';
@@ -168,7 +183,10 @@ export default function App(){
       </MenuItem>
     </Menu>
   );
-
+  if(redirect){
+    console.log(redirect)
+    return <Redirect to='/cart' />
+    }
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -192,6 +210,13 @@ export default function App(){
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <IconButton>
+            <div className={classes.profile}>
+              <div className='profile-row'>
+                <Avatar alt="H" src="/static/images/avatar/2.jpg" sizes='large' />
+              </div>
+            </div>              
+            </IconButton>
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -199,11 +224,10 @@ export default function App(){
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
-            >
-              <ShoppingCartIcon />
+            ><ShoppingCartIcon />
             </IconButton>
           </div>
-          <div className={classes.sectionMobile}>
+          {/* <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
@@ -213,7 +237,31 @@ export default function App(){
             >
               <MoreIcon />
             </IconButton>
-          </div>
+          </div> */}
+          <Menu      
+            anchorEl={anchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id={menuId}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMenuOpen}
+            onClose={handleMenuClose}
+          > 
+            {/* <div className={classes.profile}>
+              <div className='profile-row'>
+                <Avatar alt="H" src="/static/images/avatar/2.jpg" sizes='large' />
+              </div>
+              <div className='profile-row'>
+                {localStorage.getItem("firstName")}{" "}{localStorage.getItem("lastName")}
+              </div>
+              <div className='profile-row'>
+                <span>{localStorage.getItem("email")}</span>
+              </div>
+              <div className='profile-logout'> 
+                <Button onClick={handleLogout}>Logout</Button>
+              </div>
+            </div> */}
+          </Menu>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

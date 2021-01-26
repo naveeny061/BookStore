@@ -1,5 +1,5 @@
 .display{
-    height: 90vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -14,6 +14,20 @@
     margin-right: 4%;
     margin-left: 1%;
     align-items: center;
+}
+.description{
+    position: absolute;
+    /* top: 150px; */
+    /* left: 300px; */
+    z-index: 10;
+    visibility: hidden;
+    background-color: white;
+    border: 0.5px solid lightgray;
+    min-height: 118px;
+    width: 198px;
+}
+.images:hover .description{
+    visibility: unset;
 }
 .display-book{
     /* display: flex;
@@ -63,6 +77,14 @@
     font-size: 10px !important;
     white-space: nowrap;
 }
+.display-button2{
+    background-color: brown !important;
+    margin: 5px !important;
+    color: white !important;
+    font-size: 10px !important;
+    white-space: nowrap;
+    width: 100%;
+}
 .wishList{
     background-color: unset !important;
     margin: 5px !important;
@@ -80,4 +102,15 @@
     background-color: lightgray;
     /* height: 10%; */
     /* width: 20%; */
+}
+@media screen and (max-width:360px) {
+    .display-book{
+        display: inline;
+    }
+    .book{
+        width: initial;
+    }
+    .booksNumber{
+        white-space: nowrap;
+    }
 }

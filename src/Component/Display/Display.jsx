@@ -13,7 +13,6 @@ const services = new Service()
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-    //   margin: theme.spacing(1),
       minWidth: 200,
     },
     selectEmpty: {
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function Display(){
+export default function Display(props){
     const classes =useStyles();
     const [booksList, setBooksList] = React.useState([]);
     const [age, setAge] = React.useState('');
@@ -33,6 +32,7 @@ export default function Display(){
         services.books().then((result) => {
             console.log(result); 
             setBooksList(result.data.result)
+            booksList.map(item => item.isAdded = false)
         })
             .catch((error) => {
                 console.log(error)
@@ -47,6 +47,14 @@ export default function Display(){
             console.log(result)
         }).catch((error) => {
             console.log(error)
+        })
+    }
+    const cartButton = (bookItem) => {
+        props.cart.map(item => {
+            if (item.product_id._id === bookItem._id) {
+                bookItem.isAdded = true
+            }
+            // console.log(index.isAdded)
         })
     }
 
@@ -79,6 +87,7 @@ export default function Display(){
                         <div className='book'>
                             <div className='images'>
                                 <img className='display-image' src={Image} alt="img"/>
+                                <span className='description'>{item.description}</span>
                             </div>
                             <div className='details'>
                                 <div className="bookName">
@@ -91,11 +100,18 @@ export default function Display(){
                                     Rs{item.price}
                                 </div>
                                 <div className="option">
+                                    {
+                                        // console.log(item)
+                                        item.isAdded ?
+                                        <Button variant="contained" className="display-button2" onClick ={() => {addCart(item._id)}} >Added to Bag</Button>
+                                    : <> 
                                     <Button variant="contained" className="display-button" onClick ={() => {addCart(item._id)}} >Add To Bag</Button>
-                                    <Button variant="contained" className="wishList">Wishlist</Button>                               
+                                    <Button variant="contained" className="wishList">Wishlist</Button>
+                                    </>
+                                    }
+                                    {cartButton(item)}                               
                                 </div>
                             </div>
-                            
                         </div>
                     ))}
                 </div>

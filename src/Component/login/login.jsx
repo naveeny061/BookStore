@@ -5,7 +5,8 @@ import Button from '@material-ui/core/Button';
 import Service from '../../services/userServices';
 import Image from "../../assests/logo.png";
 import SnackBar from "@material-ui/core/Snackbar";
-import { IconButton } from '@material-ui/core'
+import { IconButton } from '@material-ui/core';
+import {Redirect} from 'react-router-dom'
 
 const services = new Service()
 
@@ -13,6 +14,7 @@ export default class Login extends React.Component{
     constructor(props){
         super(props)
         this.state = {
+            redirect:false,
             email:'',
             password:'',
             emailErrorFlag:false,
@@ -82,7 +84,8 @@ export default class Login extends React.Component{
                 localStorage.setItem("userToken",result.data.result.accessToken);
                 this.setState(
                     {
-                        snackbarOpen: true
+                        snackbarOpen: true,
+                        redirect:true
                     })
                 this.reset();
             }).catch(error => {
@@ -97,10 +100,13 @@ export default class Login extends React.Component{
         })
     }
     render(){
+        if(this.state.redirect){
+            return <Redirect to='/dashboard' />
+        }
         return(
             <div className='main-login'>
                 <div className='leftContainer-login'>
-                    <img className='image' src={Image} alt=""/>
+                    <img className='image-login' src={Image} alt=""/>
                     <span className='text'>Online Book Store</span>
                 </div>
                 <form className='form'>

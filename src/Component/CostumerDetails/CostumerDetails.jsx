@@ -7,10 +7,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from "@material-ui/core/Button";
 import Service from '../../services/userServices'
+import OrderSummary from "../OrderSummary/OrderSummary";
 
 const services = new Service()
 
-export default function CostumerDetails(){
+export default function CostumerDetails(props){
     const [name ,setName] = React.useState("")
     const [mobileNumber,setMobileNumber] = React.useState("")
     const [pinCode,setPinCode] = React.useState("")
@@ -35,7 +36,8 @@ export default function CostumerDetails(){
     const [landmarkError ,setLandmarkError] = React.useState("")
     const [landmarkErrorFlag ,setLandmarkErrorFlag] = React.useState("")
 
-    
+    const [displayOrderSummary ,setdisplayOrderSummary] = React.useState(false)
+
     const handleChange = (event) => {
         setValue(event.target.value);
     };
@@ -92,7 +94,8 @@ export default function CostumerDetails(){
             }
             services.customerDetails(userData, localStorage.getItem("userToken")).then(result => {
                 console.log(result)
-                // props.setOpen(true)
+                setdisplayOrderSummary(true)
+
             }).catch((error) => {
                 console.log(error)
             })
@@ -100,52 +103,60 @@ export default function CostumerDetails(){
        
     } 
     
-    return(
+    return(<>
         <div className="custumerDetails">
-            <div>
+            <div className="custumer">
                 <span className="custumerDetails-text">Customer details</span>
             </div>
-            <div className="contanier">
-                <form>
-                    <div className="Row">
-                    <TextField className="Field mr" label="Name" value={name} variant="outlined"
-                     onChange={(e) => setName(e.target.value)}size='small' error={nameErrorFlag} helperText={nameError}/>
-                    <TextField className="Field" label="MobileNumber" value={mobileNumber} variant="outlined"
-                     onChange={(e) => setMobileNumber(e.target.value)} size='small' error={mobileNumberErrorFlag} helperText={mobileNumberError}/>
+            {props.displayCustomer ?
+                // <div>
+                    <>
+                    <div className="contanier">
+                        <form>
+                        <div className="Row">
+                            <TextField className="Field mr" label="Name" value={name} variant="outlined"
+                                onChange={(e) => setName(e.target.value)}size='small' error={nameErrorFlag} helperText={nameError}/>
+                            <TextField className="Field pd" label="MobileNumber" value={mobileNumber} variant="outlined"
+                                onChange={(e) => setMobileNumber(e.target.value)} size='small' error={mobileNumberErrorFlag} helperText={mobileNumberError}/>
+                        </div>
+                        <div className="Row">
+                            <TextField className="Field mr" label="Pin Code" value={pinCode} variant="outlined"
+                                onChange={(e) => setPinCode(e.target.value)} size='small' error={pinCodeErrorFlag} helperText={pinCodeError}/>
+                            <TextField className="Field pd" label="Locality" value={locality} variant="outlined"
+                                onChange={(e) => setLocality(e.target.value)} size='small' error={localityErrorFlag} helperText={localityError}/>
+                        </div>
+                        <div className="Row">
+                            <TextField className="Field " label="Address" value={address} variant="outlined" multiline fullWidth
+                                onChange={(e) => setAddress(e.target.value)} size='small' error={addressErrorFlag} helperText={addressError}/>
+                        </div>
+                        <div className="Row">
+                            <TextField className="Field mr" label="City/Town" value={city} variant="outlined"
+                                onChange={(e) => setCity(e.target.value)} size='small' error={cityErrorFlag} helperText={cityError}/>
+                            <TextField className="Field pd" label="Landmark" value={landmark} variant="outlined"
+                                onChange={(e) => setLandmark(e.target.value)} size='small' error={landmarkErrorFlag} helperText={landmarkError}/>
+                        </div>
+                        <div className="Row">
+                            <FormControl>
+                                <span className="type-text">Type</span>
+                                <RadioGroup className="type" value={value} onChange={handleChange}>
+                                    <FormControlLabel value="Home" control={<Radio />} label="Home" />
+                                    <FormControlLabel value="Work" control={<Radio />} label="Work" />
+                                    <FormControlLabel value="Other" control={<Radio />} label="Other" color="primary" />
+                                </RadioGroup>
+                            </FormControl>
+                        </div>
+                        </form>
                     </div>
-                    <div className="Row">
-                    <TextField className="Field mr" label="Pin Code" value={pinCode} variant="outlined"
-                     onChange={(e) => setPinCode(e.target.value)} size='small' error={pinCodeErrorFlag} helperText={pinCodeError}/>
-                    <TextField className="Field" label="Locality" value={locality} variant="outlined"
-                     onChange={(e) => setLocality(e.target.value)} size='small' error={localityErrorFlag} helperText={localityError}/>
+                    {/* </div> */}
+                    <div className="Continue">
+                        <Button  className="" variant="contained" color="primary" onClick={handleClick}>
+                            Continue
+                        </Button>
                     </div>
-                    <div className="Row">
-                    <TextField className="Field mr" label="Address" value={address} variant="outlined" multiline
-                     onChange={(e) => setAddress(e.target.value)} size='small' error={addressErrorFlag} helperText={addressError}/>
-                    </div>
-                    <div className="Row">
-                    <TextField className="Field mr" label="City/Town" value={city} variant="outlined"
-                     onChange={(e) => setCity(e.target.value)} size='small' error={cityErrorFlag} helperText={cityError}/>
-                    <TextField className="Field" label="Landmark" value={landmark} variant="outlined"
-                     onChange={(e) => setLandmark(e.target.value)} size='small' error={landmarkErrorFlag} helperText={landmarkError}/>
-                    </div>
-                    <div className="Row">
-                        <FormControl>
-                            <span className="type-text">Type</span>
-                            <RadioGroup className="type" value={value} onChange={handleChange}>
-                                <FormControlLabel value="Home" control={<Radio />} label="Home" />
-                                <FormControlLabel value="Work" control={<Radio />} label="Work" />
-                                <FormControlLabel value="Other" control={<Radio />} label="Other" color="primary" />
-                            </RadioGroup>
-                        </FormControl>
-                    </div>
-                </form>
-            </div>
-            <div className="Continue">
-                <Button  className="" variant="contained" color="primary" onClick={handleClick}>
-                    Continue
-                </Button>
-            </div>
+                </>  : null 
+            }
         </div>
+        <OrderSummary displayOrderSummary={displayOrderSummary} cartList={props.cartList} removeBook={props.removeBook}/>
+        </>
     )
 }
